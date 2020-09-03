@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Generator\LaranowGenerator;
+use App\Generator\ControllerGenerator;
 use Blueprint\Blueprint;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
@@ -20,7 +20,7 @@ class BlueprintAddonServiceProvider extends ServiceProvider
             function (Blueprint $blueprint, Container $app) {
                 $blueprint->swapGenerator(
                     \Blueprint\Generators\ControllerGenerator::class,
-                    new LaranowGenerator($app['files'])
+                    new ControllerGenerator($app['files'])
                 );
 
                 return $blueprint;

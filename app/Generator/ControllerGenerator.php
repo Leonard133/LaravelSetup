@@ -19,7 +19,7 @@ use Blueprint\Models\Statements\ValidateStatement;
 use Blueprint\Tree;
 use Illuminate\Support\Str;
 
-class LaranowGenerator implements Generator
+class ControllerGenerator implements Generator
 {
     const INDENT = '        ';
 
