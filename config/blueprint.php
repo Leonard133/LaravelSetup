@@ -116,4 +116,8 @@ return [
     */
     'generate_fqcn_route' => false,
 
+    // Refer README
+    'admin_template' => 'frest',
+    'user_template' => false,
+    'landing_template' => false,
 ];

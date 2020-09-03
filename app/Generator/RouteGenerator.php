@@ -28,6 +28,8 @@ class RouteGenerator implements Generator
         /** @var \Blueprint\Models\Controller $controller */
         foreach ($tree->controllers() as $controller) {
             $type = $controller->isApiResource() ? 'api' : 'web';
+            if ($controller->namespace() !== '')
+                $type = strtolower($controller->namespace());
             $routes[$type] .= PHP_EOL . PHP_EOL . $this->buildRoutes($controller);
         }
 
@@ -56,6 +58,9 @@ class RouteGenerator implements Generator
         $className = $useTuples
             ? $controller->fullyQualifiedClassName() . '::class'
             : '\'' . str_replace('App\Http\Controllers\\', '', $controller->fullyQualifiedClassName()) . '\'';
+
+        if ($controller->namespace() !== '')
+            $className = "'" . explode("\\", $className)[1];
 
         $slug = Str::kebab($controller->prefix());
 

@@ -1,0 +1,9 @@
+controllers:
+  Admin\User:
+    index: { query: 'all:users', render: 'admin.user.index with:users' }
+    create: { render: admin.user.create }
+    store: { validate: user, save: user, redirect: admin.user.index }
+    show: { render: 'admin.user.show with:user' }
+    edit: { render: 'admin.user.edit with:user' }
+    update: { validate: user, update: user, redirect: admin.user.index }
+    destroy: { delete: user, redirect: admin.user.index }

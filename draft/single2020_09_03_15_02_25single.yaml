@@ -1,0 +1,9 @@
+controllers:
+  Admin\Post:
+    index: { query: 'all:posts', render: 'admin.admin\post.index with:admin\posts' }
+    create: { render: admin.admin\post.create }
+    store: { validate: admin\post, save: admin\post, redirect: admin.admin\post.index }
+    show: { render: 'admin.admin\post.show with:admin\post' }
+    edit: { render: 'admin.admin\post.edit with:admin\post' }
+    update: { validate: admin\post, update: admin\post, redirect: admin.admin\post.index }
+    destroy: { delete: admin\post, redirect: admin.admin\post.index }

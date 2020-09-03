@@ -1,24 +1,68 @@
 # About Laravel Setup
 
-Setup Steps
+###Setup Steps
 
-`composer install`
+1. Remove .git folder
+2. Run command `composer install`
+3. Run command `npm install`
+4. Run command `npm run dev`
+5. Run command `cp .env.example .env`
+6. Run command `php artisan key:generate`
+7. Run command `php artisan optimize`
+8. Run command `php artisan serve`
 
-`npm install`
+Change Template Steps
+1. Open config/blueprint.php
+2. Change the template value to other value
 
-`npm run dev`
+For Example
 
-`cp .env.example .env`
+"template" => "frest" To  "template" => "skote"
 
-`php artisan key:generate`
-
-`php artisan optimize`
-
-`php artisan serve`
+Before Deployment
+ 1. Run command `php artisan cleanup`
 
 ---
 
-## Packages
+### Template
+1. [Frest Template](https://pixinvent.com/demo/frest-clean-bootstrap-admin-dashboard-template/landing-page/) - frest
+2. [Skote Template](https://themesbrand.com/skote/) - skote
+
+___
+
+### Create Blueprint yaml
+
+Command:
+
+`php artisan add:blueprint {folder\\model} {option}`
+
+Option:
+
+`--force : to force rewrite yaml file` 
+
+Example:
+
+`php artisan add:blueprint Post`
+
+`php artisan add:blueprint Admin\\Post --force`
+
+To generate files based on draft.yaml
+
+`php artisan blueprint:build`
+
+To erase  generated files
+
+`php artisan blueprint:erase`
+ 
+ ---
+ 
+ ### Commonly used command
+ 1. php artisan optimize
+ 2. composer dump-autoload
+ 
+---
+
+### Packages
 
 - [Laravel UI](https://laravel.com/docs/7.x/frontend)
 - [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
@@ -34,39 +78,4 @@ Setup Steps
 - [Laravel Livewire](https://laravel-livewire.com/docs/quickstart)
 - [Laravel Activity Log](https://spatie.be/docs/laravel-activitylog/v3/introduction)
 - [Laravel Blueprint](https://blueprint.laravelshift.com/)
-
----
-
-## Template
-1. [Frest Template](https://pixinvent.com/demo/frest-clean-bootstrap-admin-dashboard-template/landing-page/)
-2. [Skote Template](https://themesbrand.com/skote/)
-
----
-
-## Common Command
-1. php artisan optimize
-2. composer dump-autoload
-
----
-
-## Create Blueprint yaml
-
-Command: 
-
-`php artisan add:blueprint {folder\\model} {option}`
-
-Option:
-
-`--force : to force rewrite yaml file` 
-
-Example:
-
-`php artisan add:blueprint Admin\\Post --force`
-
-To generate files based on draft.yaml
-
-`php artisan blueprint:build`
-
-To erase files for generated files
-
-`php artisan blueprint:erase`
+ 

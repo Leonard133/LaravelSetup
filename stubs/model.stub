@@ -1,0 +1,18 @@
+<?php
+
+class
+{
+{
+class
+}
+
+namespace {
+    {
+
+        namespace }}
+} extends
+Model
+{
+    protected
+    $guarded = ["id"];
+}

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Blueprint;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
 
-class BlueprintCommand extends Command
+class AllCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'add:blueprint {model* : Please specify at least one model} {--api} {--F | --force}';
+    protected $signature = 'blueprint {model* : Please specify at least one model} {--api}';
 
     /**
      * The console command description.
@@ -87,11 +87,7 @@ class BlueprintCommand extends Command
             'controllers' => $data['controller'],
         ];
         $yaml = Yaml::dump($content, 3);
-        if ($this->option('force')) {
-            File::put(base_path('draft.yaml'), $yaml);
-        } else {
-            if (!File::exists(base_path('draft.yaml')))
-                File::put(base_path('draft.yaml'), $yaml);
-        }
+        File::copy(base_path('draft.yaml'), base_path('draft/' . now()->format('Y_m_d_H_i_s') . '_draft.yaml'));
+        File::put(base_path('draft.yaml'), $yaml);
     }
 }
