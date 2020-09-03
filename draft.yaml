@@ -1,14 +1,14 @@
 models:
-    Category:
-      content: string
-      deleted_at: softDeletes
-seeders: Category
+  Post:
+    content: string
+    deleted_at: softDeletes
+seeders: Post
 controllers:
-  Admin\Category:
-    index: { query: 'all:categories', render: 'admin.category.index with:categories' }
-    create: { render: admin.category.create }
-    store: { validate: category, save: category, redirect: admin.category.index }
-    show: { render: 'admin.category.show with:category' }
-    edit: { render: 'admin.category.edit with:category' }
-    update: { validate: category, update: category, redirect: admin.category.index }
-    destroy: { delete: category, redirect: admin.category.index }
+  User\Post:
+    index: { query: 'all:posts', render: 'user.post.index with:posts' }
+    create: { render: user.post.create }
+    store: { validate: post, save: post, redirect: user.post.index }
+    show: { render: 'user.post.show with:post' }
+    edit: { render: 'user.post.edit with:post' }
+    update: { validate: post, update: post, redirect: user.post.index }
+    destroy: { delete: post, redirect: user.post.index }

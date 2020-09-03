@@ -193,7 +193,7 @@ class ControllerGenerator implements Generator
         $guard = strtolower($controller->namespace()) . (($controller->namespace() === '') ? '' : '.');
         $type = strtolower($controller->name()) . '.';
         $methods = collect($controller->methods())->filter(function ($item, $key) {
-            if ($key !== 'store' && $key !== 'update')
+            if ($key !== 'store' && $key !== 'update' && $key !== 'show')
                 return $item;
         })->toArray();
         foreach ($methods as $name => $statements) {
@@ -202,6 +202,8 @@ class ControllerGenerator implements Generator
                 $only = '"create","store"';
             if ($name === 'edit')
                 $only = '"edit","update"';
+            if ($name === 'index')
+                $only = '"index","show"';
             $middleware .= self::INDENT . '$this->middleware("permission:' . $guard . $type . $name . '")->only(' . $only . ');' . PHP_EOL;
         }
         return trim($middleware);
