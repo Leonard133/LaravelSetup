@@ -42,7 +42,7 @@ class ControllerGenerator implements Generator
 
         $output = [];
 
-        $stub = $this->files->get('stubs'.DIRECTORY_SEPARATOR.'controller.blueprint.stub');
+        $stub = $this->files->get('stubs' . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR . 'controller.blueprint.stub');
 
         /** @var \Blueprint\Models\Controller $controller */
         foreach ($tree->controllers() as $controller) {
@@ -190,19 +190,19 @@ class ControllerGenerator implements Generator
     protected function buildMiddleware(Controller $controller)
     {
         $middleware = '';
-        $guard = strtolower($controller->namespace());
-        $type = strtolower($controller->name());
+        $guard = strtolower($controller->namespace()) . (($controller->namespace() === '') ? '' : '.');
+        $type = strtolower($controller->name()) . '.';
         $methods = collect($controller->methods())->filter(function ($item, $key) {
-            if($key !== 'store' && $key !== 'update')
+            if ($key !== 'store' && $key !== 'update')
                 return $item;
         })->toArray();
         foreach ($methods as $name => $statements) {
             $only = "'$name'";
-            if($name === 'create')
+            if ($name === 'create')
                 $only = '"create","store"';
-            if($name === 'edit')
+            if ($name === 'edit')
                 $only = '"edit","update"';
-            $middleware .= self::INDENT.'$this->middleware("permission:'.$guard.'.'.$type.'.'.$name.'")->only('.$only.');'.PHP_EOL;
+            $middleware .= self::INDENT . '$this->middleware("permission:' . $guard . $type . $name . '")->only(' . $only . ');' . PHP_EOL;
         }
         return trim($middleware);
     }

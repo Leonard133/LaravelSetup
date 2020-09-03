@@ -36,37 +36,44 @@ class BlueprintCommand extends Command
         foreach ($model as $m) {
 
             $item = explode('\\', $m);
-            $guard = strtolower($item[0]);
-            $mod = $item[1];
-            $lowerMod = strtolower($mod);
+            if (count($item) > 1) {
+                $guard = strtolower($item[0]) . '.';
+                $mod = $item[1];
+                $lowerMod = strtolower($mod);
+            } else {
+                $guard = '';
+                $mod = $item[0];
+                $lowerMod = strtolower($mod);
+            }
+
             $data["model"][$mod] = ['content' => 'string', 'deleted_at' => 'softDeletes'];
             $data["controller"][$m] = [
                 'index' => [
                     'query' => 'all:' . Str::of($mod)->lower()->plural(),
-                    'render' => $guard . '.' . $lowerMod . '.index with:' . Str::of($mod)->lower()->plural()
+                    'render' => $guard . $lowerMod . '.index with:' . Str::of($mod)->lower()->plural()
                 ],
                 'create' => [
-                    'render' => $guard . '.' . $lowerMod . '.create'
+                    'render' => $guard . $lowerMod . '.create'
                 ],
                 'store' => [
                     'validate' => $lowerMod,
                     'save' => $lowerMod,
-                    'redirect' => $guard . '.' . $lowerMod . '.index'
+                    'redirect' => $guard . $lowerMod . '.index'
                 ],
                 'show' => [
-                    'render' => $guard . '.' . $lowerMod . '.show with:' . $lowerMod
+                    'render' => $guard . $lowerMod . '.show with:' . $lowerMod
                 ],
                 'edit' => [
-                    'render' => $guard . '.' . $lowerMod . '.edit with:' . $lowerMod
+                    'render' => $guard . $lowerMod . '.edit with:' . $lowerMod
                 ],
                 'update' => [
                     'validate' => $lowerMod,
                     'update' => $lowerMod,
-                    'redirect' => $guard . '.' . $lowerMod . '.index'
+                    'redirect' => $guard . $lowerMod . '.index'
                 ],
                 'destroy' => [
                     'delete' => $lowerMod,
-                    'redirect' => $guard . '.' . $lowerMod . '.index'
+                    'redirect' => $guard . $lowerMod . '.index'
                 ]
             ];
             if ($this->option('api'))
@@ -75,7 +82,7 @@ class BlueprintCommand extends Command
         $content = [
             'models' => $data['model'],
             'seeders' => implode(', ', $model->map(function ($item) {
-                return explode("\\", $item)[1];
+                return explode("\\", $item)[1] ?? $item;
             })->unique()->toArray()),
             'controllers' => $data['controller'],
         ];

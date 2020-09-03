@@ -1,3 +1,0 @@
-models:
-    Model\Admin: {  }
-    Model\User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable', contact_no: 'string nullable', address: 'string nullable', identity_no: 'string nullable', status: 'string nullable', last_login: 'datetime nullable', otp_verified_at: 'datetime nullable' }

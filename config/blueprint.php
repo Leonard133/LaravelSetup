@@ -114,6 +114,6 @@ return [
     | or wish to improve static analysis.
     |
     */
-    'generate_fqcn_route' => true,
+    'generate_fqcn_route' => false,
 
 ];

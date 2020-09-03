@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Generator\ControllerGenerator;
+use App\Generator\RouteGenerator;
 use Blueprint\Blueprint;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +22,11 @@ class BlueprintAddonServiceProvider extends ServiceProvider
                 $blueprint->swapGenerator(
                     \Blueprint\Generators\ControllerGenerator::class,
                     new ControllerGenerator($app['files'])
+                );
+
+                $blueprint->swapGenerator(
+                    \Blueprint\Generators\RouteGenerator::class,
+                    new RouteGenerator($app['files'])
                 );
 
                 return $blueprint;
