@@ -1,0 +1,15 @@
+<?php
+
+namespace {{ namespace }};
+
+{{ imports }}
+
+class {{ class }} extends Controller
+{
+
+    public function __construct() {
+        {{ middleware }}
+    }
+
+    {{ methods }}
+}

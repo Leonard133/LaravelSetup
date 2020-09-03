@@ -1,21 +1,47 @@
 models:
-  Admin:
-    username: string
-    name: string
-    password: string
-    email: string
-    phone: string nullable
-    avatar: string nullable
-    status: tinyinteger
-    last_login: timestamp
-    softDeletes
-    relationships:
-      belongsToMany: Branch
-
+    Post:
+        content: string
+        deleted_at: softDeletes
+    Comment:
+        content: string
+        deleted_at: softDeletes
+    Category:
+        content: string
+        deleted_at: softDeletes
+    Application:
+        content: string
+        deleted_at: softDeletes
+seeders: 'Post, Comment, Category, Application'
 controllers:
-  Admin\Post:
-    index:
-      query: all:posts
-      render: post.index with:posts
-
-seeders: Admin
+    Admin\Post:
+        index: { query: 'all:posts', render: 'admin.post.index with:posts' }
+        create: { render: admin.post.create }
+        store: { validate: post, save: post, redirect: admin.post.index }
+        show: { render: 'admin.post.show with:post' }
+        edit: { render: 'admin.post.edit with:post' }
+        update: { validate: post, update: post, redirect: admin.post.index }
+        destroy: { delete: post, redirect: admin.post.index }
+    Admin\Comment:
+        index: { query: 'all:comments', render: 'admin.comment.index with:comments' }
+        create: { render: admin.comment.create }
+        store: { validate: comment, save: comment, redirect: admin.comment.index }
+        show: { render: 'admin.comment.show with:comment' }
+        edit: { render: 'admin.comment.edit with:comment' }
+        update: { validate: comment, update: comment, redirect: admin.comment.index }
+        destroy: { delete: comment, redirect: admin.comment.index }
+    Admin\Category:
+        index: { query: 'all:categories', render: 'admin.category.index with:categories' }
+        create: { render: admin.category.create }
+        store: { validate: category, save: category, redirect: admin.category.index }
+        show: { render: 'admin.category.show with:category' }
+        edit: { render: 'admin.category.edit with:category' }
+        update: { validate: category, update: category, redirect: admin.category.index }
+        destroy: { delete: category, redirect: admin.category.index }
+    User\Application:
+        index: { query: 'all:applications', render: 'user.application.index with:applications' }
+        create: { render: user.application.create }
+        store: { validate: application, save: application, redirect: user.application.index }
+        show: { render: 'user.application.show with:application' }
+        edit: { render: 'user.application.edit with:application' }
+        update: { validate: application, update: application, redirect: user.application.index }
+        destroy: { delete: application, redirect: user.application.index }
