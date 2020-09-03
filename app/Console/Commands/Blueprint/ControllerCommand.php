@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Blueprint;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
@@ -82,5 +83,12 @@ class ControllerCommand extends Command
         }
         File::copy(base_path('single.yaml'), base_path('draft/single' . now()->format('Y_m_d_H_i_s') . 'single.yaml'));
         File::put(base_path('single.yaml'), $yaml);
+
+        if (File::exists("single.yaml")) {
+            Artisan::call("blueprint:build", [
+                'draft' => 'single.yaml',
+                '--skip' => 'tests'
+            ]);
+        }
     }
 }

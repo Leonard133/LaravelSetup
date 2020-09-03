@@ -7,7 +7,4 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('index', 'DashboardController')->name('index');
-
-    Route::resource('category', 'CategoryController');
-
 });

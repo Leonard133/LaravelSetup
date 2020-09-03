@@ -86,6 +86,9 @@ class AllCommand extends Command
             })->unique()->toArray()),
             'controllers' => $data['controller'],
         ];
+        if (!File::exists("draft")) {
+            File::makeDirectory("draft", 0755, true, true);
+        }
         $yaml = Yaml::dump($content, 3);
         File::copy(base_path('draft.yaml'), base_path('draft/' . now()->format('Y_m_d_H_i_s') . '_draft.yaml'));
         File::put(base_path('draft.yaml'), $yaml);
