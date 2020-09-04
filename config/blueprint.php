@@ -117,7 +117,7 @@ return [
     'generate_fqcn_route' => false,
 
     // Refer README
-    'admin_template' => 'frest',
+    'admin_template' => 'metronic',
     'user_template' => false,
     'landing_template' => false,
 ];

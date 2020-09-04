@@ -30,6 +30,7 @@ Before Deployment (Coming Soon)
 ### Template
 1. [Frest Template](https://pixinvent.com/demo/frest-clean-bootstrap-admin-dashboard-template/landing-page/) - frest
 2. [Skote Template](https://themesbrand.com/skote/) - skote
+3. [Metronic Template (Demo 1)](https://preview.keenthemes.com/metronic/demo1/index.html) - metronic1
 
 ___
 

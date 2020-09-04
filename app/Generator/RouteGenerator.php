@@ -37,11 +37,15 @@ class RouteGenerator implements Generator
 
         foreach (array_filter($routes) as $type => $definitions) {
             $path = 'routes/' . $type . '.php';
-            file_put_contents($path, str_replace(
-                "});",
-                PHP_EOL . '    ' . trim($definitions) . PHP_EOL . PHP_EOL . "});",
-                file_get_contents($path)
-            ));
+            if($type === 'admin' || $type === 'user')
+            {
+                file_put_contents($path, str_replace(
+                    "});",
+                    PHP_EOL . '    ' . trim($definitions) . PHP_EOL . PHP_EOL . "});",
+                    file_get_contents($path)
+                ));
+            }
+
             $paths[] = $path;
         }
 
@@ -50,6 +54,7 @@ class RouteGenerator implements Generator
 
     protected function buildRoutes(Controller $controller)
     {
+        $resourceRoutes = '';
         $routes = '';
         $methods = array_keys($controller->methods());
 
@@ -66,7 +71,7 @@ class RouteGenerator implements Generator
 
         $resource_methods = array_intersect($methods, Controller::$resourceMethods);
         if (count($resource_methods)) {
-            $routes .= $controller->isApiResource()
+            $resourceRoutes .= $controller->isApiResource()
                 ? sprintf("Route::apiResource('%s', %s)", $slug, $className)
                 : sprintf("Route::resource('%s', %s)", $slug, $className);
 
@@ -76,13 +81,13 @@ class RouteGenerator implements Generator
 
             if (count($missing_methods)) {
                 if (count($missing_methods) < 4) {
-                    $routes .= sprintf("->except('%s')", implode("', '", $missing_methods));
+                    $resourceRoutes .= sprintf("->except('%s')", implode("', '", $missing_methods));
                 } else {
-                    $routes .= sprintf("->only('%s')", implode("', '", $resource_methods));
+                    $resourceRoutes .= sprintf("->only('%s')", implode("', '", $resource_methods));
                 }
             }
 
-            $routes .= ';' . PHP_EOL;
+            $resourceRoutes .= ';' . PHP_EOL;
         }
 
         $methods = array_diff($methods, Controller::$resourceMethods);
@@ -98,7 +103,7 @@ class RouteGenerator implements Generator
             $routes .= PHP_EOL;
         }
 
-        return trim($routes);
+        return trim($routes.$resourceRoutes);
     }
 
     public function types(): array

@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        $role = Role::where('name', 'super_admin')->where('guard_name', 'admin')->first();
         $permissions = collect(Route::getRoutes()->getRoutes())->map(function ($item) {
             if (Str::is('admin.', $item->getAction()['as']) || Str::is('admin.index', $item->getAction()['as']) || Str::is('admin.generated*', $item->getAction()['as']) || 'admin.login' === $item->getAction()['as'] || 'admin.logout' === $item->getAction()['as'] || 'admin.register' === $item->getAction()['as'] || Str::is('admin.password*', $item->getAction()['as']) || Str::is('admin.verification*', $item->getAction()['as']))
                 return null;
@@ -26,6 +28,10 @@ class PermissionSeeder extends Seeder
             Permission::create(['name' => $permission, 'guard_name' => 'admin']);
         }
 
+        $role->givePermissionTo($permissions);
+
+        $role = Role::where('name', 'super_admin')->where('guard_name', 'user')->first();
+
         $permissions = collect(Route::getRoutes()->getRoutes())->map(function ($item) {
             if (Str::is('user.', $item->getAction()['as']) || Str::is('user.index', $item->getAction()['as']) || Str::is('user.generated*', $item->getAction()['as']) || 'user.login' === $item->getAction()['as'] || 'user.logout' === $item->getAction()['as'] || 'user.register' === $item->getAction()['as'] || Str::is('user.password*', $item->getAction()['as']) || Str::is('user.verification*', $item->getAction()['as']))
                 return null;
@@ -37,5 +43,7 @@ class PermissionSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission, 'guard_name' => 'user']);
         }
+
+        $role->givePermissionTo($permissions);
     }
 }

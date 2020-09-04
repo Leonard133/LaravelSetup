@@ -58,6 +58,7 @@ class AllCommand extends Command
                 'store' => [
                     'validate' => $lowerMod,
                     'save' => $lowerMod,
+                    'flash' => 'success',
                     'redirect' => $guard . $lowerMod . '.index'
                 ],
                 'show' => [
@@ -69,12 +70,24 @@ class AllCommand extends Command
                 'update' => [
                     'validate' => $lowerMod,
                     'update' => $lowerMod,
+                    'flash' => 'success',
                     'redirect' => $guard . $lowerMod . '.index'
                 ],
                 'destroy' => [
                     'delete' => $lowerMod,
+                    'flash' => 'success',
                     'redirect' => $guard . $lowerMod . '.index'
-                ]
+                ],
+                'delete' => [
+                    'update' => $lowerMod,
+                    'flash' => 'success',
+                    'redirect' => $guard . $lowerMod . '.index'
+                ],
+                'restore' => [
+                    'update' => $lowerMod,
+                    'flash' => 'success',
+                    'redirect' => $guard . $lowerMod . '.index'
+                ],
             ];
             if ($this->option('api'))
                 $data["controller"]['API\\' . $m] = ['resource' => 'api'];

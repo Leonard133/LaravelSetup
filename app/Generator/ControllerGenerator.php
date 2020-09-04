@@ -91,7 +91,7 @@ class ControllerGenerator implements Generator
         foreach ($controller->methods() as $name => $statements) {
             $method = str_replace('{{ method }}', $name, $template);
 
-            if (in_array($name, ['edit', 'update', 'show', 'destroy'])) {
+            if (in_array($name, ['edit', 'update', 'show', 'destroy', 'delete', 'restore'])) {
                 $context = Str::singular($controller->prefix());
                 $reference = $this->fullyQualifyModelReference($controller->namespace(), Str::camel($context));
                 $variable = '$'.Str::camel($context);

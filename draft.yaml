@@ -1,14 +1,16 @@
 models:
-  Post:
-    content: string
-    deleted_at: softDeletes
-seeders: Post
+    Comment:
+        content: string
+        deleted_at: softDeletes
+seeders: Comment
 controllers:
-  Admin\Post:
-    index: { query: 'all:posts', render: 'admin.post.index with:posts' }
-    create: { render: admin.post.create }
-    store: { validate: post, save: post, redirect: admin.post.index }
-    show: { render: 'admin.post.show with:post' }
-    edit: { render: 'admin.post.edit with:post' }
-    update: { validate: post, update: post, redirect: admin.post.index }
-    destroy: { delete: post, redirect: admin.post.index }
+    Admin\Comment:
+        index: { query: 'all:comments', render: 'admin.comment.index with:comments' }
+        create: { render: admin.comment.create }
+        store: { validate: comment, save: comment, flash: success, redirect: admin.comment.index }
+        show: { render: 'admin.comment.show with:comment' }
+        edit: { render: 'admin.comment.edit with:comment' }
+        update: { validate: comment, update: comment, flash: success, redirect: admin.comment.index }
+        destroy: { delete: comment, flash: success, redirect: admin.comment.index }
+        delete: { update: comment, flash: success, redirect: admin.comment.index }
+        restore: { update: comment, flash: success, redirect: admin.comment.index }
