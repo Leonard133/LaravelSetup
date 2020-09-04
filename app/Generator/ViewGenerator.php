@@ -71,15 +71,29 @@ class ViewGenerator implements Generator
             "" => 'blueprint.landing_template'
         ];
 
-        if($guard === 'admin')
-        {
-            if (! $this->files->exists('public/admin-asset')) {
-                $this->files->makeDirectory(dirname($path), 0755, true);
-            }
-        }
-
         if(!is_bool(config($type[$guard])))
+        {
+            if($guard === 'admin')
+            {
+                if (!$this->files->exists('public/admin-asset')) {
+                    $this->files->makeDirectory('public/admin-asset', 0755, true);
+                }
+                if (!$this->files->exists('public/admin-asset/asset')) {
+                    $this->files->copyDirectory('stubs/view/'.config($type[$guard]).'/asset', 'public/admin-asset/template');
+                }
+                if (!$this->files->exists('resources/views/components')) {
+                    $this->files->copyDirectory('stubs/view/'.config($type[$guard]).'/components', 'resources/views/components');
+                }
+                if (!$this->files->exists('resources/views/admin/auth')) {
+                    $this->files->copyDirectory('stubs/view/'.config($type[$guard]).'/auth', 'resources/views/admin/auth');
+                }
+                if (!$this->files->exists('resources/views/admin/layouts')) {
+                    $this->files->copyDirectory('stubs/view/'.config($type[$guard]).'/layouts', 'resources/views/admin/layouts');
+                }
+            }
+
             return $this->files->get('stubs/view/' . config($type[$guard]) . '/template/' . $method .'.stub');
+        }
         return $this->files->stub('view.stub');
     }
 

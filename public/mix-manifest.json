@@ -1,7 +1,0 @@
-{
-    "/admin-asset/globaljs/app.js": "/admin-asset/globaljs/app.js",
-    "/user-asset/globaljs/app.js": "/user-asset/globaljs/app.js",
-    "/user-asset/globalcss/app.css": "/user-asset/globalcss/app.css",
-    "/admin-asset/globalcss/app.css": "/admin-asset/globalcss/app.css",
-    "/tailwind.css": "/tailwind.css"
-}
