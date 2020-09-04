@@ -45,5 +45,6 @@ class PermissionResetCommand extends Command
         Artisan::call('db:seed', [
             '--class' => 'PermissionSeeder'
         ]);
+        Artisan::call('permission:cache-reset');
     }
 }

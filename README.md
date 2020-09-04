@@ -19,7 +19,10 @@ For Example
 
 "template" => "frest" To  "template" => "skote"
 
-Before Deployment
+Reset Permission
+1. Run command `php artisan permission:reset`
+
+Before Deployment (Coming Soon)
  1. Run command `php artisan cleanup`
 
 ---
@@ -34,19 +37,18 @@ ___
 
 Command:
 
-`php artisan add:blueprint {folder\\model} {option}`
-
-Option:
-
-`--force : to force rewrite yaml file` 
+`php artisan blueprint {folder\\model}`
+`php artisan blueprint:controller {folder\\model}`
 
 Example:
 
-`php artisan add:blueprint Post`
+`php artisan blueprint Post`
 
-`php artisan add:blueprint Admin\\Post --force`
+`php artisan blueprint Admin\\Post`
 
-To generate files based on draft.yaml
+`php artisan blueprint:controller Admin\\Post`
+
+To generate files based on single.yaml or draft.yaml
 
 `php artisan blueprint:build`
 
