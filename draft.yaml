@@ -1,14 +1,30 @@
 models:
-  Post:
-    content: string
-    deleted_at: softDeletes
+    Post:
+        content: string
+        deleted_at: softDeletes
 seeders: Post
 controllers:
-  Admin\Post:
-    index: { query: 'all:posts', render: 'admin.post.index with:posts' }
-    create: { render: admin.post.create }
-    store: { validate: post, save: post, redirect: admin.post.index }
-    show: { render: 'admin.post.show with:post' }
-    edit: { render: 'admin.post.edit with:post' }
-    update: { validate: post, update: post, redirect: admin.post.index }
-    destroy: { delete: post, redirect: admin.post.index }
+    Admin\Post:
+        index: { query: 'all:posts', render: 'admin.post.index with:posts' }
+        create: { render: admin.post.create }
+        store: { validate: post, save: post, redirect: admin.post.index }
+        show: { render: 'admin.post.show with:post' }
+        edit: { render: 'admin.post.edit with:post' }
+        update: { validate: post, update: post, redirect: admin.post.index }
+        destroy: { delete: post, redirect: admin.post.index }
+    User\Post:
+        index: { query: 'all:posts', render: 'user.post.index with:posts' }
+        create: { render: user.post.create }
+        store: { validate: post, save: post, redirect: user.post.index }
+        show: { render: 'user.post.show with:post' }
+        edit: { render: 'user.post.edit with:post' }
+        update: { validate: post, update: post, redirect: user.post.index }
+        destroy: { delete: post, redirect: user.post.index }
+    Post:
+        index: { query: 'all:posts', render: 'post.index with:posts' }
+        create: { render: post.create }
+        store: { validate: post, save: post, redirect: post.index }
+        show: { render: 'post.show with:post' }
+        edit: { render: 'post.edit with:post' }
+        update: { validate: post, update: post, redirect: post.index }
+        destroy: { delete: post, redirect: post.index }
