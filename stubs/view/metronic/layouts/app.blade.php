@@ -41,24 +41,24 @@
       class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 <!--begin::Main-->
 <!--begin::Header Mobile-->
-@include('admin.shared.header-mobile')
+@include('admin.layouts.header-mobile')
 <!--end::Header Mobile-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Page-->
     <div class="d-flex flex-row flex-column-fluid page">
         <!--begin::Aside-->
-    @include('admin.shared.navbar')
+    @include('admin.layouts.navbar')
     <!--end::Aside-->
         <!--begin::Wrapper-->
         <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
             <!--begin::Header-->
-        @include('admin.shared.header')
+        @include('admin.layouts.header')
         <!--end::Header-->
             <!--begin::Content-->
         @yield('content')
         <!--end::Content-->
             <!--begin::Footer-->
-        @include('admin.shared.footer')
+        @include('admin.layouts.footer')
         <!--end::Footer-->
         </div>
         <!--end::Wrapper-->
@@ -67,7 +67,7 @@
 </div>
 <!--end::Main-->
 <!-- begin::User Panel-->
-<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">@include('admin.shared.user_panel')</div>
+<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">@include('admin.layouts.user_panel')</div>
 <!-- end::User Panel-->
 <!--begin::Scrolltop-->
 <div id="kt_scrolltop" class="scrolltop">
@@ -144,7 +144,7 @@
 {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
 <!--end::Page Scripts-->
 @stack('scripts')
-@include('admin.shared.sweetalert')
+@include('admin.layouts.sweetalert')
 </body>
 <!--end::Body-->
 </html>

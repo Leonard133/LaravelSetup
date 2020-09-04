@@ -4,7 +4,7 @@
         <!--begin::Logo-->
         <a href="{{ route('admin.dashboard') }}" class="brand-logo">
             <span class="text-white tw-text-xl">{{ config('app.name') }}</span>
-{{--            <img alt="Logo" src="{{ asset('assets/media/logos/logo-light.png') }}"/>--}}
+            {{--            <img alt="Logo" src="{{ asset('assets/media/logos/logo-light.png') }}"/>--}}
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->
@@ -40,14 +40,14 @@
                 </li>
                 <li class="menu-item {{ activeRoute('admin.admin', true) }}"
                     aria-haspopup="true">
-                    <a href="{{ route('admin.admin.index') }}" class="menu-link">
+                    <a href="#" class="menu-link">
                         <i class="menu-icon fas fa-user-shield"></i>
                         <span class="menu-text">Admin List</span>
                     </a>
                 </li>
                 <li class="menu-item {{ activeRoute('admin.branch', true) }}"
                     aria-haspopup="true">
-                    <a href="{{ route('admin.branch.index') }}" class="menu-link">
+                    <a href="#" class="menu-link">
                         <i class="menu-icon fas fa-map-marker-alt"></i>
                         <span class="menu-text">Branch List</span>
                     </a>
@@ -68,7 +68,7 @@
 												</span>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.company.index') }}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -76,7 +76,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.company.pending.index') }}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -84,7 +84,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.company.index') }}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -143,7 +143,7 @@
                             </li>
                             <li class="menu-item {{ Route::is('admin.order.index')? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('admin.order.index')}}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -153,7 +153,7 @@
 
                             <li class="menu-item {{ Route::is('admin.orderLog.index')? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('admin.order.index')}}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -162,7 +162,7 @@
                             </li>
                             <li class="menu-item {{ Route::is('admin.admin.index')? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('admin.order.index')}}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -189,7 +189,7 @@
                             </li>
                             <li class="menu-item {{ Route::is('admin.parcel.index') && request()->query('type') == ''  ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('admin.parcel.index')}}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -198,7 +198,7 @@
                             </li>
                             <li class="menu-item {{ Route::is('admin.parcel.index') && request()->query('type') == 1  ? 'menu-item-active' : '' }}"
                                 aria-haspopup="true">
-                                <a href="{{ route('admin.parcel.index',['type'=>1])}}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -250,7 +250,7 @@
 												</span>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.warehouse.index') }}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -258,7 +258,7 @@
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('admin.warehouse.index') }}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -284,7 +284,7 @@
 												</span>
                             </li>
                             <li class="menu-item {{ Route::is('admin.driver.*')  ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                <a href="{{ route('admin.driver.index')}}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
@@ -310,7 +310,7 @@
 												</span>
                             </li>
                             <li class="menu-item {{ Route::is('admin.vehicle.*')  ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                <a href="{{ route('admin.vehicle.index') }}" class="menu-link">
+                                <a href="#" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>

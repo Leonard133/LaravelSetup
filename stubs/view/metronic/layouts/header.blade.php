@@ -173,38 +173,6 @@
                 </div>
                 <!--end::Dropdown-->
             </div>
-            <div class="dropdown">
-                <!--begin::Toggle-->
-                <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
-                    <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-                        <i class="fas fa-code-branch tw-text-indigo-500"></i>
-                    </div>
-                </div>
-                <!--end::Toggle-->
-                <!--begin::Dropdown-->
-                <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
-                    <!--begin::Nav-->
-                    <ul class="navi navi-hover py-4">
-                        <!--begin::Item-->
-                        <li class="navi-item">
-                            @if(admin('type') !== 2)
-                                <a href="{{ route('admin.branch.choose', ['branch' => 'all']) }}" class="navi-link">
-                                    <span class="navi-text">All Branch</span>
-                                </a>
-                            @endif
-                            @foreach(admin('activeBranches') as $branch)
-                                <a href="{{ route('admin.branch.choose', ['branch' => $branch->code, 'name' => $branch->name, 'id' => $branch->id]) }}"
-                                   class="navi-link">
-                                    <span class="navi-text">{{ $branch->name }}</span>
-                                </a>
-                            @endforeach
-                        </li>
-                        <!--end::Item-->
-                    </ul>
-                    <!--end::Nav-->
-                </div>
-                <!--end::Dropdown-->
-            </div>
             <!--end::Languages-->
             <!--begin::User-->
             <div class="topbar-item">

@@ -6,5 +6,5 @@ Route::redirect('', 'index');
 Auth::routes();
 
 Route::group(['middleware' => ['auth:admin']], function () {
-    Route::get('index', 'DashboardController')->name('index');
+    Route::get('index', 'DashboardController')->name('dashboard');
 });

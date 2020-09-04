@@ -1,18 +1,10 @@
 <?php
 
-class
-{
-{
-class
-}
+namespace {{ namespace }};
 
-namespace {
-    {
+use Illuminate\Database\Eloquent\Model;
 
-        namespace }}
-} extends
-Model
+class {{ class }} extends Model
 {
-    protected
-    $guarded = ["id"];
+    public $guarded = ['id'];
 }

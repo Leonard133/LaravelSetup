@@ -43,7 +43,16 @@ class ViewGenerator implements Generator
                         $this->files->makeDirectory(dirname($path), 0755, true);
                     }
 
-                    $this->files->put($path, $this->populateStub($stub, $statement));
+                    if($method === 'index')
+                    {
+                        $stub = str_replace(':stype:', strtolower($controller->name()), $stub);
+                        $stub = str_replace(':type:', $controller->name(), $stub);
+                        if(count($statement->data()) !== 0)
+                            $stub = str_replace(':data:', $statement->data()[0], $stub);
+                        $stub = str_replace(':guard:', strtolower($controller->namespace()), $stub);
+                    }
+
+                    $this->files->put($path, $stub);
 
                     $output['created'][] = $path;
                 }
@@ -91,17 +100,12 @@ class ViewGenerator implements Generator
                     $this->files->copyDirectory('stubs/view/'.config($type[$guard]).'/layouts', 'resources/views/admin/layouts');
                 }
                 if (!$this->files->exists('app/View/Components')) {
-                    $this->files->copyDirectory('stubs/view/'.config($type[$guard]).'/View', 'app/View/Components');
+                    $this->files->copyDirectory('stubs/view/'.config($type[$guard]).'/View/Components', 'app/View/Components');
                 }
             }
 
             return $this->files->get('stubs/view/' . config($type[$guard]) . '/template/' . $method .'.stub');
         }
         return $this->files->stub('view.stub');
-    }
-
-    protected function populateStub(string $stub, RenderStatement $renderStatement)
-    {
-        return str_replace('{{ view }}', $renderStatement->view(), $stub);
     }
 }

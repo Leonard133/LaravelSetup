@@ -1,75 +1,87 @@
-@extends('admin.shared.layout')
+@extends('admin.layouts.app')
 
-@section('title', 'Admin')
+@section('title', ":type:")
 
 @push('styles')
-<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css?v=7.0.5') }}" rel="stylesheet"
-      type="text/css"/>
+<link href="{{ asset('admin-asset/template/plugins/custom/datatables/datatables.bundle.css?v=7.0.5') }}" rel="stylesheet" type="text/css"/>
 @endpush
 
 @section('content')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Subheader-->
-    <x-subheader
-        title="Admin List {{ (isset(session('selectedBranch')['name'])) ? ' - '.session('selectedBranch')['name'] : null }}">
-        <div class="dropdown dropdown-inline mr-2">
-            <a href="{{ route('admin.admin.create')}}" class="mr-2 btn btn-primary font-weight-bolder">Create</a>
-            <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export
-            </button>
-            <!--begin::Dropdown Menu-->
-            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                <!--begin::Navigation-->
-                <ul class="navi flex-column navi-hover py-2">
-                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose
-                        an option:
-                    </li>
-                    <li class="navi-item">
-                        <a href="#" class="navi-link">
+    <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">:type: List</h5>
+                    <!--end::Page Title-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+            <div class="d-flex align-items-center">
+                <div class="dropdown dropdown-inline mr-2">
+                    <a href="{{ route(':guard:.:stype:.create')}}" class="mr-2 btn btn-primary font-weight-bolder">Create</a>
+                    <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export
+                    </button>
+                    <!--begin::Dropdown Menu-->
+                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                        <!--begin::Navigation-->
+                        <ul class="navi flex-column navi-hover py-2">
+                            <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose
+                                an option:
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
                                             <span class="navi-icon">
                                                 <i class="la la-print"></i>
                                             </span>
-                            <span class="navi-text">Print</span>
-                        </a>
-                    </li>
-                    <li class="navi-item">
-                        <a href="#" class="navi-link">
+                                    <span class="navi-text">Print</span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
                                             <span class="navi-icon">
                                                 <i class="la la-copy"></i>
                                             </span>
-                            <span class="navi-text">Copy</span>
-                        </a>
-                    </li>
-                    <li class="navi-item">
-                        <a href="#" class="navi-link">
+                                    <span class="navi-text">Copy</span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
                                             <span class="navi-icon">
                                                 <i class="la la-file-excel-o"></i>
                                             </span>
-                            <span class="navi-text">Excel</span>
-                        </a>
-                    </li>
-                    <li class="navi-item">
-                        <a href="#" class="navi-link">
+                                    <span class="navi-text">Excel</span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
                                             <span class="navi-icon">
                                                 <i class="la la-file-text-o"></i>
                                             </span>
-                            <span class="navi-text">CSV</span>
-                        </a>
-                    </li>
-                    <li class="navi-item">
-                        <a href="#" class="navi-link">
+                                    <span class="navi-text">CSV</span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
                                             <span class="navi-icon">
                                                 <i class="la la-file-pdf-o"></i>
                                             </span>
-                            <span class="navi-text">PDF</span>
-                        </a>
-                    </li>
-                </ul>
-                <!--end::Navigation-->
+                                    <span class="navi-text">PDF</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--end::Navigation-->
+                    </div>
+                    <!--end::Dropdown Menu-->
+                </div>
             </div>
-            <!--end::Dropdown Menu-->
         </div>
-    </x-subheader>
+    </div>
     <!--end::Subheader-->
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
@@ -92,16 +104,6 @@
                             <input type="text" class="form-control datatable-input" id="phone" placeholder="Phone"
                                    data-col-index="1">
                         </div>
-                        @if(!session('selectedBranch'))
-                        <div class="flex-grow-1 tw-m-3">
-                            <select class="form-control datatable-input" id="branch">
-                                <option value="">Select Branch</option>
-                                @foreach ($branches as $branch)
-                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        @endif
                         <div class="flex-grow-1 tw-m-3">
                             <select class="form-control datatable-input" id="status">
                                 <option value="">Select Status</option>
@@ -131,8 +133,8 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.5') }}"></script>
+<script src="{{ asset('admin-asset/template/vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="{{ asset('admin-asset/template/assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.5') }}"></script>
 <script>
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
